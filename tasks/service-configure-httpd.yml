@@ -1,0 +1,23 @@
+#SPDX-License-Identifier: GPL-2.0-or-later
+---
+- name: Firewall Rule for HTTPD
+  ansible.posix.firewalld:
+    service: "{{ item }}"
+    state: enabled
+    permanent: true
+    immediate: true
+    offline: true
+  with_items:
+    - http
+    - https
+
+# Generate a self-signed certificate for development
+- name: Generate SSL Certificate
+  command: >
+    openssl req -x509 -noenc -days 3650
+    -newkey rsa:2048
+    -keyout {{ ssl_key_path }}
+    -out {{ ssl_cert_path }}
+    -subj "/CN={{ server_name }}/O=CICD/OU=DevOps/C=US"
+  args:
+    creates: "{{ ssl_cert_path }}"

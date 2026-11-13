@@ -1,0 +1,14 @@
+#SPDX-License-Identifier: GPL-2.0-or-later
+---
+- name: Copy OpenProject DNF Repository Configuration
+  copy:
+    src: "files/openproject.repo"
+    dest: "/etc/yum.repos.d/"
+    owner: "root"
+    group: "root"
+    mode: "0644"
+
+- name: Install DNF Packages
+  ansible.builtin.dnf:
+    name={{ dnf_packages }}
+    state=latest

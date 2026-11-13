@@ -1,0 +1,7 @@
+#SPDX-License-Identifier: GPL-2.0-or-later
+---
+# Handlers file for OpenProject
+- name: Restart httpd
+  systemd:
+    name: httpd
+    state: restarted

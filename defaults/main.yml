@@ -1,0 +1,40 @@
+#SPDX-License-Identifier: GPL-2.0-or-later
+---
+# Override these in the global group_vars or vars/mainl.yml
+
+# Service RPMS
+dnf_packages:
+  - catdoc 
+  - catdoc-wordview
+  - dialog
+  - httpd
+  - httpd-core
+  - httpd-filesystem
+  - httpd-manual
+  - httpd-tools
+  - ImageMagick
+  - libpq
+  - memcached
+  - memcached-selinux
+  - mod_ssl
+  - openssl3-libs
+  - poppler-utils
+  - postgresql-contrib
+  - postgresql-private-libs
+  - postgresql
+  - sqlite
+  - tk
+  - unrtf
+
+# HTTPD Variables
+server_name: www.example.com
+server_admin: admin@example.com
+document_root: /var/www/html
+ssl_cert_path: /etc/pki/tls/certs/openproject.cert
+ssl_key_path: /etc/pki/tls/private/openproject.key
+# OpenProject Variables
+db_host: db.your.tld
+db_port: 5432
+db_user: openproject
+db_name: openproject
+db_password: "overrid_with_inventory_vault"

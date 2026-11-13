@@ -1,0 +1,7 @@
+[openproject]
+name=Repository for opf/openproject (stable/17) packages
+baseurl=https://packages.openproject.com/srv/rpm/opf/openproject/stable/17/el/9/$basearch/
+enabled=1
+gpgcheck=0
+repo_gpgcheck=1
+gpgkey=https://packages.openproject.com/srv/rpm/opf/openproject/gpg-key.asc
