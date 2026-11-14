@@ -1,18 +1,42 @@
 #SPDX-License-Identifier: GPL-2.0-or-later
 ---
-# ToDo: Build EPEL Stub RPM
+# Build EPEL Stub RPM
+- name: Create RPM Build Paths
+  ansible.builtin.command: /usr/bin/rpmdev-setuptree
 
-# ToDo: Install OpenProject RPM
+- name: Copy RPM SPEC File
+  copy:
+    src: "files/epel-release-stub.spec"
+    dest: "/root/rpmbuild/SPECS/"
+    owner: "root"
+    group: "root"
+    mode: "0644"
 
-# ToDo: Configure OpenProject
-#- name: OpenProject Template Configs
-#  ansible.builtin.template:
-#    src: "templates/installer.dat.j2"
-#    dest: "/etc/openproject/installer.dat"
-#    owner: "openproject"
-#    group: "openproject"
-#    mode: "0640"
+- name: Build EPEL Stub
+  ansible.builtin.command: rpmbuild -bb epel-release-stub.spec
+  args:
+    chdir: "/root/rpmbuild/SPECS/"
+    creates: "/root/rpmbuild/RPMS/noarch/epel-release-stub-1.0-1.noarch.rpm"
+
+# Install OpenProject RPM
+- name: Install DNF Packages
+  ansible.builtin.dnf:
+    name:
+      - "/root/rpmbuild/RPMS/noarch/epel-release-stub-1.0-1.noarch.rpm"
+      - openproject
+    disable_gpg_check: true
+    state: latest
+
+# Configure OpenProject
+- name: OpenProject Template Configs
+  ansible.builtin.template:
+    src: "templates/openproject-installer.dat.j2"
+    dest: "/etc/openproject/installer.dat"
+    owner: "openproject"
+    group: "openproject"
+    mode: "0640"
 
 # ToDo: Launch OpenProject
-#sudo openproject config:set DATABASE_URL="postgresql://[user[:password]@][host][:port][/dbname][?param1=value1&...]
+# - name: Launch OpenProject
+#   ansible.builtin.command: openproject configure
 

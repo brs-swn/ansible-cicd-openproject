@@ -22,6 +22,8 @@ dnf_packages:
   - postgresql-contrib
   - postgresql-private-libs
   - postgresql
+  - rpm-build
+  - rpmdevtools
   - sqlite
   - tk
   - unrtf
@@ -32,9 +34,11 @@ server_admin: admin@example.com
 document_root: /var/www/html
 ssl_cert_path: /etc/pki/tls/certs/openproject.cert
 ssl_key_path: /etc/pki/tls/private/openproject.key
+
 # OpenProject Variables
 db_host: db.your.tld
 db_port: 5432
 db_user: openproject
 db_name: openproject
-db_password: "overrid_with_inventory_vault"
+db_password: "override_with_inventory_vault"
+api_key: "override_with_inventory_vault"

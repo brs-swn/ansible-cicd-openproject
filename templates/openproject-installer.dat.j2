@@ -1,0 +1,24 @@
+openproject/edition default
+postgres/autoinstall reuse
+postgres/db_host {{ db_host }}
+postgres/db_port {{ db_port }}
+postgres/db_username {{ db_user }}
+postgres/db_password {{ db_password }}
+postgres/db_name {{ db_name }}
+server/autoinstall install
+server/variant apache2
+
+server/hostname {{ server_name }}
+server/server_path_prefix 
+server/ssl yes
+server/ssl_cert {{ ssl_cert_path }}
+server/ssl_key {{ ssl_key_path }}
+server/ssl_ca 
+
+repositories/api-key {{ 
+repositories/svn-install skip
+repositories/git-install skip
+memcached/autoinstall install
+openproject/admin_email {{ server_admin }}
+openproject/default_language en
+repositories/git-http-backend /usr/libexec/git-core/git-http-backend/
